@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Box</title>
+
+    <link href="style.css" rel="stylesheet"/>
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-wrapper w-100">
+            <div class="search-bar w-100">
+                <input type="text" class="search-bar-field" id="searchField" oninput="searchData(event)" />
+                <span class="cross-icon">&#10005; </span>
+            </div>
+
+            <div class="search-suggestions" id="searchSuggestions">
+                <ul id="suggestionsList">
+                </ul>
+            </div>
+        </div>
+
+        <div class="seach-history">
+            <div class="d-flex-aligned">
+                <h3>Search History</h3>
+                <a href="javascript:void()" class="light-text" onclick="clearSearchHistory()">Clear Search History</a>
+            </div>
+            <div class="search-list" id="searchesList">
+                <div class="search-row">
+                    <h5>screwdriver</h5>
+                    <p>2018-01-01, 2:31PM</p>
+                    <span>X</span>
+                </div>
+
+                <div class="search-row">
+                    <h5>screwdriver</h5>
+                    <p>2018-01-01, 2:31PM</p>
+                    <span>X</span>
+                </div>
+
+                <div class="search-row">
+                    <h5>screwdriver</h5>
+                    <p>2018-01-01, 2:31PM</p>
+                    <span>X</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
