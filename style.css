@@ -79,3 +79,7 @@
         width: 95%;
     }
 }
+
+#searchesList h5 {
+    margin: 10px 0px;
+}

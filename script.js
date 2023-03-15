@@ -10,7 +10,9 @@ async function loadData() {
     .then((response) => {
         return response.json();
     }).then((data) => {
-        return data;
+        if(data && Array.isArray(data)) return data;
+
+        return [];
     }).catch(err => { console.error(err) });
     
     return data;
@@ -38,8 +40,12 @@ function searchData(e) {
         });
 
         let html = "";
-        for (const option of filtered) {
-            html += `<li onclick="selectFileteredOption('${option.title}')">${option.title}</li>`;
+        if(!filtered.length){
+            html += `<li>Sorry! Unable to find relevant data.</li>`;
+        }else{
+            for (const option of filtered) {
+                html += `<li onclick="selectFileteredOption('${option.title}')">${option.title}</li>`;
+            }
         }
 
         document.getElementById('suggestionsList').innerHTML = html;
