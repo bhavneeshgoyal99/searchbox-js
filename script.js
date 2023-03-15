@@ -1,17 +1,27 @@
 var searchHistoryArr = [];
 
-var searchOptions = [];
-function loadData() {
-    fetch('https://jsonplaceholder.typicode.com/posts').then((response) => {
+/**
+ * Fetch data from server
+ * 
+ * @returns {Object}
+ */
+async function loadData() {
+    const data = await fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => {
         return response.json();
     }).then((data) => {
-        searchOptions = data;
+        return data;
     }).catch(err => { console.error(err) });
+    
+    return data;
 }
-loadData();
 
 let searchTimeout;
-
+/**
+ * Handles Search input and performs search operations
+ * 
+ * @param {DOM} e 
+ */
 function searchData(e) {
     clearTimeout(searchTimeout);
 
@@ -21,9 +31,10 @@ function searchData(e) {
         return
     };
 
-    searchTimeout = setTimeout(() => {
-        const filtered = searchOptions.filter(option => {
-            return option.title.search(keywords);
+    searchTimeout = setTimeout(async () => {
+        const getApiResult = await loadData();
+        const filtered = getApiResult.filter(option => {
+            return option.title.includes(keywords);
         });
 
         let html = "";
@@ -36,6 +47,19 @@ function searchData(e) {
     }, 500);
 }
 
+/**
+ * Cancel Search
+ */
+function cancelSearch(){
+    document.getElementById('searchField').value = '';
+    document.getElementById('searchSuggestions').style.display = 'none';
+}
+
+/**
+ * Handles search selection
+ * 
+ * @param {String} title
+ */
 function selectFileteredOption(title) {
     searchHistoryArr.push({ title, timestamp: new Date() });
 
@@ -44,7 +68,9 @@ function selectFileteredOption(title) {
     searchHistory();
 }
 
-
+/**
+ * Creates DOM for search history list
+ */
 function searchHistory() {
     var html = "";
     var i = 0;
@@ -71,15 +97,20 @@ function searchHistory() {
     document.getElementById('searchesList').innerHTML = html;
 }
 
-
+/**
+ * Clears search history
+ */
 function clearSearchHistory() {
     searchHistoryArr = [];
 
     searchHistory();
 }
 
+/**
+ * Deletes specific search record
+ */
 function removeFromSearchHistory(index) {
-    const newArray = searchHistoryArr.splice(index, 1);
+    searchHistoryArr.splice(index, 1);
 
     searchHistory();
 }

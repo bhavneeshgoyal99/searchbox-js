@@ -54,6 +54,9 @@
     z-index: 7;
     background: white;
     display: none;
+    max-height: 230px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .cross-icon {
@@ -62,11 +65,13 @@
     right: 10px;
     font-size: 16px;
     color: grey;
+    cursor: pointer;
 }
 
 .delete-history {
     font-size: 16px;
     color: grey;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 480px) {
